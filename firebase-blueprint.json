@@ -1,0 +1,70 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user account information, subscription status, and trial usage.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "isPremium": { "type": "boolean" },
+        "deviceId": { "type": "string", "description": "Unique ID for the device to prevent multi-account abuse" },
+        "trials": {
+          "type": "object",
+          "properties": {
+            "slides": { "type": "integer" },
+            "solver": { "type": "integer" },
+            "humanizer": { "type": "integer" },
+            "detector": { "type": "integer" }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "isPremium", "trials"]
+    },
+    "StudyMaterial": {
+      "title": "Study Material",
+      "description": "Generated content from lecture slides.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "summary": { "type": "string" },
+        "flashcards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question": { "type": "string" },
+              "answer": { "type": "string" }
+            }
+          }
+        },
+        "quiz": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question": { "type": "string" },
+              "options": { "type": "array", "items": { "type": "string" } },
+              "correctAnswer": { "type": "string" }
+            }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "summary"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents."
+    },
+    "/materials/{materialId}": {
+      "schema": "StudyMaterial",
+      "description": "Generated study materials."
+    }
+  }
+}

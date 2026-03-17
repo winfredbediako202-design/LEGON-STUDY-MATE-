@@ -1,0 +1,8 @@
+{
+  "name": "Legon Study Mate",
+  "description": "Your ultimate academic companion for summarizing lecture slides, generating flashcards, and taking quizzes. Master your courses at the University of Ghana and beyond.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
